@@ -6,7 +6,13 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], assets_folder='./assets/')
+
+external_stylesheets = [
+    {'href': 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', 'rel': 'stylesheet'},
+    {'href': '/assets/my_styles.css', 'rel': 'stylesheet'}
+]
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 url = 'https://data.calgary.ca/resource/jicz-mxiz.json'
 
@@ -201,10 +207,6 @@ app.layout = html.Div(
         ),
     ]
 )
-
-app.css.append_css({
-    'external_url': app.get_asset_url('my-styles.css')
-})
 
 
 @app.callback(Output('report_day', 'children'),
